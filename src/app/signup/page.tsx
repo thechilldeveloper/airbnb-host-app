@@ -34,7 +34,7 @@ export default function SignupPage() {
       } else {
         await signUp(email, password, "host", name.trim());
         toast.success("Host account created! Welcome aboard 🏠");
-        router.push("/host/dashboard");
+        router.push("/host/dashboard/checkins");
       }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "";
@@ -52,64 +52,113 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen bg-[#F0FDFF] flex flex-col">
-      {/* Ocean hero */}
-      <div className="relative bg-gradient-to-br from-[#0C4A6E] via-[#0891B2] to-[#22D3EE] px-6 pt-14 pb-16 text-white overflow-hidden">
-        <div className="absolute -top-16 -right-16 w-56 h-56 bg-white/5 rounded-full pointer-events-none" />
+      {/* Hero */}
+      <div className="relative bg-gradient-to-br from-[#0C4A6E] via-[#0891B2] to-[#22D3EE] px-6 pt-14 pb-20 text-white overflow-hidden">
+        <div className="absolute -top-20 -right-20 w-72 h-72 bg-white/5 rounded-full pointer-events-none" />
+        <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-white/5 rounded-full pointer-events-none" />
         <span className="absolute top-8 right-8 text-4xl float-1 select-none pointer-events-none opacity-80">🌴</span>
-        <span className="absolute top-20 right-20 text-2xl float-2 select-none pointer-events-none opacity-60">🐚</span>
-        <p className="relative text-[11px] font-bold tracking-widest uppercase opacity-70 mb-2">
-          🌊 Goa Stay
-        </p>
-        <h1 className="relative text-3xl font-extrabold">Join Paradise!</h1>
-        <p className="relative text-sm opacity-75 mt-1">Create your account and start your Goa experience</p>
+        <span className="absolute top-20 right-20 text-2xl float-2 select-none pointer-events-none opacity-50">☀️</span>
+        <span className="absolute bottom-16 left-6 text-3xl float-3 select-none pointer-events-none opacity-40">🐠</span>
+        <div className="relative">
+          <p className="text-[11px] font-bold tracking-widest uppercase opacity-60 mb-3">
+            🌊 Goa Stay
+          </p>
+          <h1 className="text-4xl font-extrabold leading-tight">
+            Join<br />Paradise!
+          </h1>
+          <p className="text-sm opacity-70 mt-2">Create your account and start your Goa experience</p>
+        </div>
         <div className="absolute bottom-0 left-0 right-0 leading-none pointer-events-none">
-          <svg viewBox="0 0 1200 48" preserveAspectRatio="none" className="w-full block h-12">
-            <path d="M0,24 C300,48 600,0 900,24 C1050,36 1150,12 1200,24 L1200,48 L0,48 Z" fill="#F0FDFF" />
+          <svg viewBox="0 0 1200 56" preserveAspectRatio="none" className="w-full block h-14">
+            <path d="M0,28 C200,56 400,0 600,28 C800,56 1000,0 1200,28 L1200,56 L0,56 Z" fill="#F0FDFF" />
           </svg>
         </div>
       </div>
 
-      <div className="flex-1 max-w-sm mx-auto w-full px-4 -mt-2 py-6 flex flex-col gap-6">
+      <div className="flex-1 max-w-sm mx-auto w-full px-4 py-8 flex flex-col gap-6">
         {/* Role selector */}
         <div className="slide-up">
-          <p className="text-sm font-bold text-[#0C4A6E] mb-3">I want to sign up as…</p>
+          <p className="text-xs font-bold text-[#0C4A6E] uppercase tracking-wider mb-4">
+            I want to sign up as…
+          </p>
+
           <div className="grid grid-cols-2 gap-3">
-            {(
-              [
-                {
-                  value: "guest",
-                  label: "Guest",
-                  emoji: "🏖️",
-                  desc: "I'm visiting Goa",
-                },
-                {
-                  value: "host",
-                  label: "Host",
-                  emoji: "🏠",
-                  desc: "I manage a property",
-                },
-              ] as const
-            ).map(({ value, label, emoji, desc }) => (
-              <button
-                key={value}
-                onClick={() => setRole(value)}
-                className={`flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-all duration-200 active:scale-95 ${
-                  role === value
-                    ? "border-[#0891B2] bg-[#E0F2FE] shadow-md"
-                    : "border-gray-200 bg-white hover:border-[#0891B2]/40"
-                }`}
-              >
-                <span className="text-3xl">{emoji}</span>
-                <span className="font-bold text-sm text-[#0C4A6E]">{label}</span>
-                <span className="text-xs text-gray-500 text-center">{desc}</span>
-              </button>
-            ))}
+            {/* Guest card */}
+            <button
+              onClick={() => setRole("guest")}
+              className={`relative flex flex-col gap-2 p-5 rounded-2xl border-2 transition-all duration-200 active:scale-95 overflow-hidden ${
+                role === "guest"
+                  ? "border-[#0891B2] shadow-lg shadow-[#0891B2]/20"
+                  : "border-gray-200 bg-white hover:border-[#0891B2]/40"
+              }`}
+              style={role === "guest" ? { background: "linear-gradient(135deg, #E0F2FE, #F0FDFF)" } : { background: "white" }}
+            >
+              {role === "guest" && (
+                <div className="absolute top-2 right-2 w-2 h-2 bg-[#0891B2] rounded-full" />
+              )}
+              <span className="text-4xl">🏖️</span>
+              <div>
+                <p className="font-extrabold text-sm text-[#0C4A6E]">Guest</p>
+                <p className="text-[11px] text-gray-400 leading-tight mt-0.5">I&apos;m visiting Goa</p>
+              </div>
+              <div className="mt-1 text-[10px] font-semibold text-[#0891B2] bg-[#E0F2FE] px-2 py-0.5 rounded-full w-fit">
+                No email needed
+              </div>
+            </button>
+
+            {/* Host card */}
+            <button
+              onClick={() => setRole("host")}
+              className={`relative flex flex-col gap-2 p-5 rounded-2xl border-2 transition-all duration-200 active:scale-95 overflow-hidden ${
+                role === "host"
+                  ? "border-[#0C4A6E] shadow-lg shadow-[#0C4A6E]/20"
+                  : "border-gray-200 bg-white hover:border-[#0C4A6E]/40"
+              }`}
+              style={role === "host" ? { background: "linear-gradient(135deg, #0C4A6E, #0891B2)" } : { background: "white" }}
+            >
+              {role === "host" && (
+                <div className="absolute top-2 right-2 w-2 h-2 bg-white rounded-full" />
+              )}
+              <span className="text-4xl">🏠</span>
+              <div>
+                <p className={`font-extrabold text-sm ${role === "host" ? "text-white" : "text-[#0C4A6E]"}`}>
+                  Host
+                </p>
+                <p className={`text-[11px] leading-tight mt-0.5 ${role === "host" ? "text-white/60" : "text-gray-400"}`}>
+                  I manage a property
+                </p>
+              </div>
+              <div className={`mt-1 text-[10px] font-semibold px-2 py-0.5 rounded-full w-fit ${
+                role === "host" ? "text-[#0C4A6E] bg-white/20 text-white" : "text-[#0C4A6E] bg-gray-100"
+              }`}>
+                Full dashboard
+              </div>
+            </button>
           </div>
         </div>
 
+        {/* Form */}
         {role && (
           <form onSubmit={handleSignup} className="flex flex-col gap-4 slide-up">
-            <div className="bg-white rounded-2xl p-5 flex flex-col gap-4 border border-[#E0F2FE]">
+            <div className={`rounded-2xl p-5 flex flex-col gap-4 border shadow-sm bg-white ${
+              role === "host" ? "border-[#0C4A6E]/20" : "border-[#E0F2FE]"
+            }`}>
+              <div className="flex items-center gap-3 pb-3 border-b border-gray-100">
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                  role === "guest" ? "bg-[#E0F2FE]" : ""
+                }`} style={role === "host" ? { background: "linear-gradient(135deg, #0C4A6E, #0891B2)" } : undefined}>
+                  <span className="text-xl">{role === "guest" ? "🏖️" : "🏠"}</span>
+                </div>
+                <div>
+                  <p className="font-bold text-sm text-[#0C4A6E]">
+                    {role === "guest" ? "Guest Sign Up" : "Host Sign Up"}
+                  </p>
+                  <p className="text-xs text-gray-400">
+                    {role === "guest" ? "Just your name to start" : "Create your host account"}
+                  </p>
+                </div>
+              </div>
+
               <Input
                 label={role === "guest" ? "Your name" : "Full name"}
                 placeholder={role === "guest" ? "e.g. Priya Mehta" : "e.g. Aryan Sharma"}
@@ -148,18 +197,32 @@ export default function SignupPage() {
             </div>
 
             {role === "guest" && (
-              <div
-                className="rounded-2xl px-4 py-3 text-sm text-[#0891B2] border border-[#E0F2FE]"
-                style={{ background: "linear-gradient(135deg, #F0FDFF, #E0F2FE)" }}
-              >
+              <div className="rounded-2xl px-4 py-3 text-sm text-[#0891B2] border border-[#E0F2FE]"
+                style={{ background: "linear-gradient(135deg, #F0FDFF, #E0F2FE)" }}>
                 🏖️ As a guest, we just need your name to get started. No email required!
               </div>
             )}
 
-            <Button type="submit" loading={loading} fullWidth>
+            <Button
+              type="submit"
+              loading={loading}
+              fullWidth
+              style={role === "host" ? {
+                background: "linear-gradient(135deg, #0C4A6E, #0891B2)",
+                color: "white",
+                border: "none",
+              } : undefined}
+            >
               {role === "guest" ? "Start my Goa stay 🌴" : "Create host account 🏠"}
             </Button>
           </form>
+        )}
+
+        {!role && (
+          <div className="text-center py-6 text-gray-400 text-sm">
+            <span className="text-2xl block mb-2">👆</span>
+            Select your role above to get started
+          </div>
         )}
 
         <p className="text-center text-sm text-gray-500">
