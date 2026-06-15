@@ -30,7 +30,7 @@ export default function SignupPage() {
       if (role === "guest") {
         localStorage.setItem("guestName", name.trim());
         toast.success(`Welcome, ${name.trim()}! 🌴 Enjoy your stay!`);
-        router.push("/");
+        router.push("/home");
       } else {
         await signUp(email, password, "host", name.trim());
         toast.success("Host account created! Welcome aboard 🏠");

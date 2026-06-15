@@ -77,7 +77,7 @@ export function HostSidebar() {
       {/* Footer */}
       <div className="px-3 pb-5 pt-3 border-t border-white/10 flex flex-col gap-2">
         <Link
-          href="/"
+          href="/home"
           className="flex items-center gap-3 px-3 py-2 rounded-xl text-[11px] font-medium text-white/40 hover:text-white/70 hover:bg-white/5 transition-all"
         >
           <span className="text-sm">🏖️</span>

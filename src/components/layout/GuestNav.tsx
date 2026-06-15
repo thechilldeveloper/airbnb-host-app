@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { Home, ClipboardCheck, UtensilsCrossed, MessageCircle, MapPin } from "lucide-react";
 
 const tabs = [
-  { href: "/",         label: "Home",     icon: Home,            exact: true },
+  { href: "/home",     label: "Home",     icon: Home,            exact: true },
   { href: "/checkin",  label: "Check In", icon: ClipboardCheck,  exact: false },
   { href: "/food",     label: "Food",     icon: UtensilsCrossed, exact: false },
   { href: "/messages", label: "Messages", icon: MessageCircle,   exact: false },

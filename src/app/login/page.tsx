@@ -30,7 +30,7 @@ export default function LoginPage() {
         }
         localStorage.setItem("guestName", name.trim());
         toast.success(`Welcome, ${name.trim()}! 🌴`);
-        router.push("/");
+        router.push("/home");
       } else {
         await signIn(email, password);
         toast.success("Welcome back! 🏠");
