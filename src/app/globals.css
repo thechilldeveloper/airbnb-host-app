@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #F0FDFF;
+  --color-foreground: #0C4A6E;
+  --color-ocean: #0891B2;
+  --color-ocean-dark: #0C4A6E;
+  --color-ocean-mid: #0E7490;
+  --color-ocean-light: #E0F2FE;
+  --color-ocean-pale: #F0FDFF;
+  --color-sunset: #F97316;
+  --color-sand: #FEF9EE;
+  --color-palm: #059669;
+  --color-brand-rose: #FF385C;
+  --color-brand-dark: #0C4A6E;
+  --color-brand-light: #F0FDFF;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* ─── Float (emoji decorations) ─── */
+@keyframes float-1 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(4deg); }
+}
+@keyframes float-2 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-7px) rotate(-3deg); }
+}
+@keyframes float-3 {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-5px) rotate(2deg); }
+}
+.float-1 { animation: float-1 4s ease-in-out infinite; }
+.float-2 { animation: float-2 5.5s ease-in-out infinite; animation-delay: 1s; }
+.float-3 { animation: float-3 3.8s ease-in-out infinite; animation-delay: 2s; }
+
+/* ─── Slide up (card entrance) ─── */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.slide-up { animation: slide-up 0.45s ease-out both; }
+
+/* ─── Wave shift (ocean animation) ─── */
+@keyframes wave-shift {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.wave-slow  { animation: wave-shift 14s linear infinite; }
+.wave-mid   { animation: wave-shift 10s linear infinite reverse; }
+.wave-fast  { animation: wave-shift 7s  linear infinite; }
+
+/* ─── Palm tree sway ─── */
+@keyframes sway {
+  0%, 100% { transform: rotate(-3deg); }
+  50%       { transform: rotate(3deg);  }
+}
+.sway { animation: sway 4s ease-in-out infinite; transform-origin: 50% 100%; }
+.sway-slow { animation: sway 6s ease-in-out infinite; transform-origin: 50% 100%; animation-delay: 1s; }
+
+/* ─── Sun ray pulse ─── */
+@keyframes ray-pulse {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.85; }
+}
+.ray-pulse { animation: ray-pulse 2.5s ease-in-out infinite; }
+
+/* ─── Sun glow (box/filter shadow pulse) ─── */
+@keyframes sun-glow {
+  0%, 100% { filter: drop-shadow(0 0 18px rgba(255,200,60,0.7)) drop-shadow(0 0 40px rgba(255,160,0,0.4)); }
+  50%       { filter: drop-shadow(0 0 36px rgba(255,220,80,1))   drop-shadow(0 0 80px rgba(255,180,0,0.6)); }
+}
+.sun-glow { animation: sun-glow 3s ease-in-out infinite; }
+
+/* ─── Seagull flight ─── */
+@keyframes seagull-fly {
+  0%   { transform: translateX(-80px) translateY(0px);   opacity: 0; }
+  5%   { opacity: 1; }
+  50%  { transform: translateX(45vw)  translateY(-24px); opacity: 1; }
+  95%  { opacity: 1; }
+  100% { transform: translateX(110vw) translateY(-8px);  opacity: 0; }
+}
+.bird-1 { animation: seagull-fly 13s linear 0s   infinite; }
+.bird-2 { animation: seagull-fly 17s linear 4s   infinite; }
+.bird-3 { animation: seagull-fly 21s linear 9s   infinite; }
+.bird-4 { animation: seagull-fly 15s linear 11s  infinite; }
+
+/* ─── Water bubble rise ─── */
+@keyframes bubble-rise {
+  0%   { transform: translateY(0)    scale(1);   opacity: 0.55; }
+  80%  { opacity: 0.4; }
+  100% { transform: translateY(-32px) scale(0.2); opacity: 0; }
+}
+
+/* ─── Foam shimmer ─── */
+@keyframes foam-pulse {
+  0%, 100% { opacity: 0.35; transform: scaleX(1);    }
+  50%       { opacity: 0.65; transform: scaleX(1.04); }
+}
+
+/* ─── Star twinkle ─── */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50%       { opacity: 0.9; transform: scale(1.2); }
+}
+
+/* ─── Glass / scrollbar ─── */
+.glass {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ─── Card ─── */
+.beach-card {
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(8, 145, 178, 0.12);
+  box-shadow: 0 2px 12px rgba(8,145,178,0.08), 0 1px 3px rgba(0,0,0,0.05);
+  border-radius: 1.25rem;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.beach-card:hover {
+  box-shadow: 0 8px 24px rgba(8,145,178,0.15), 0 2px 6px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+}
+
+/* ─── Gradient text ─── */
+.gradient-text {
+  background: linear-gradient(135deg, #7DD3FC 0%, #BAE6FD 50%, #FDE68A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
